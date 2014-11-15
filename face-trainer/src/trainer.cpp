@@ -17,6 +17,7 @@
 #include <string>
 #include <algorithm>
 #include <FreeImage.h>
+#include "file_type.h"
 
 using namespace std;
 using namespace cv;
@@ -38,12 +39,12 @@ void buildTrainer(string trainfile, queue<string> img_names){
 		}
 		string label = img_name.substr(0, loc);
 		string file_format;
-		loc = img_name.find_last_of('.', 1);
-		if(loc == string::npos){
+		char* file_ext = get_file_extension(img_name.c_str());
+		if(file_ext == NULL){
 			fprintf (stderr, "'%s' has no file extension\n", img_name.c_str());
 			abort();
 		}
-		file_format = img_name.substr(loc + 1, string::npos);
+		file_format = file_ext;
 		transform(file_format.begin(), file_format.end(), file_format.begin(), ::tolower);
 		Mat img;
 		if(file_format == "bmp"||file_format == "dib"||file_format == "pbm"||file_format == "pgm"||file_format == "ppm"||file_format == "sr"||file_format == "ras"){
