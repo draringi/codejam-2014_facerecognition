@@ -13,7 +13,7 @@ using namespace cv;
 using namespace std;
 
 namespace facerecogntion{
-Mat clean_face(Mat face){
+void clean_face(Mat face, Mat* result){
 	CascadeClassifier filter;
 	filter.load( FACE_FILTER );
 	vector<Rect> faces;
@@ -35,7 +35,7 @@ Mat clean_face(Mat face){
 	tmp.convertTo(tmp, CV_8UC3);
 	equalizeHist( tmp, tmp );
 	tmp.copyTo(gray_face);
-	return gray_face.clone();
+	gray_face.copyTo(*result);
 
 }
 /*Mat norm_0_255(InputArray _src) {

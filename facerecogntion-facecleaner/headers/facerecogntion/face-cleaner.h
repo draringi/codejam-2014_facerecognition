@@ -13,7 +13,7 @@
 
 #define FACE_FILTER "/usr/local/share/OpenCV/haarcascades/haarcascade_frontalface_alt2.xml"
 namespace facerecogntion {
-cv::Mat clean_face(cv::Mat face);
+void clean_face(cv::Mat face, cv::Mat* result);
 }
 
 #endif /* FACE_CLEANER_H_ */

@@ -58,7 +58,9 @@ void buildTrainer(string trainfile, queue<string> img_names){
 		} else {
 			fprintf (stderr, "'%s' is not a supported extension\n", file_format.c_str());
 		}
-		img_vector.push_back(facerecogntion::clean_face(img));
+		Mat cleaned_image;
+		facerecogntion::clean_face(img, &cleaned_image)
+		img_vector.push_back(cleaned_image);
 		img_labels.push_back(atoi(label.c_str()));
 		printf("LOADED\n");
 	}
