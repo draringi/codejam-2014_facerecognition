@@ -58,11 +58,15 @@ void buildTrainer(string trainfile, queue<string> img_names){
 		} else {
 			fprintf (stderr, "'%s' is not a supported extension\n", file_format.c_str());
 		}
-		printf("LOADED\n");
 		img_vector.push_back(facerecogntion::clean_face(img));
 		img_labels.push_back(atoi(label.c_str()));
+		printf("LOADED\n");
 	}
+	printf("Initiating Recognition Algorithm...\n");
 	Ptr<FaceRecognizer> model = RECOGNITION_ALGO_BUILDER;
+	printf("Training Recognition Algorithm...\n");
 	model->train(img_vector, img_labels);
+	printf("Saving Trained Recognition Algorithm to %s\n", trainfile.c_str());
 	model->save(trainfile);
+	printf("All Done\n");
 }
