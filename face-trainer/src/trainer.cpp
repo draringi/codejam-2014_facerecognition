@@ -23,7 +23,7 @@ using namespace cv;
 
 void buildTrainer(string trainfile, queue<string> img_names){
 	vector<Mat> img_vector;
-	vector<int> img_label;
+	vector<int> img_labels;
 	while(!img_names.empty()){
 		string img_name = img_names.front();
 		img_names.pop();
@@ -58,6 +58,10 @@ void buildTrainer(string trainfile, queue<string> img_names){
 		} else {
 			fprintf (stderr, "'%s' is not a supported extension\n", file_format.c_str());
 		}
+		img_vector.push_back(facerecogntion::clean_face(img));
+		img_labels.push_back(atoi(label.c_str()));
 	}
-
+	Ptr<FaceRecognizer> model = RECOGNITION_ALGO_BUILDER;
+	model->train(img_vector, img_labels);
+	model->save(trainfile);
 }

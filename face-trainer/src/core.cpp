@@ -12,6 +12,7 @@
 #include <unistd.h>
 #include <queue>
 #include <string>
+#include "trainer.h"
 
 using namespace std;
 
@@ -50,5 +51,5 @@ int main (int argc, char *argv[]){
 		image_list.push(argv[index]);
 	}
 	//Now that the command line has been parsed, let us make use of it.
-
+	buildTrainer(trainfile, image_list);
 }
