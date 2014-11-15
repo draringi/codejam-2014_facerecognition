@@ -31,7 +31,8 @@ Mat clean_face(Mat face){
 		}
 	}
 	Mat tmp;
-	cvtColor(gray_face(roi), tmp, CV_BGR2GRAY);
+	gray_face(roi).convertTo(tmp, CV_8UC1);
+	equalizeHist( tmp, tmp );
 	return tmp;
 
 }
