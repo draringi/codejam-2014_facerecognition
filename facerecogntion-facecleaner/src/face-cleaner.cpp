@@ -32,11 +32,12 @@ Mat clean_face(Mat face){
 		}
 	}
 	Mat tmp = gray_face(roi);
-	//equalizeHist( tmp, tmp );
+	tmp.convertTo(tmp, CV_8UC3);
+	equalizeHist( tmp, tmp );
 	return tmp.clone();
 
 }
-Mat norm_0_255(InputArray _src) {
+/*Mat norm_0_255(InputArray _src) {
     Mat src = _src.getMat();
     // Create and return normalized image:
     Mat dst;
@@ -52,6 +53,6 @@ Mat norm_0_255(InputArray _src) {
         break;
     }
     return dst;
-}
+}*/
 
 }
