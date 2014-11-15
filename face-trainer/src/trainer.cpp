@@ -62,6 +62,7 @@ void buildTrainer(string trainfile, queue<string> img_names){
 		img_labels.push_back(atoi(label.c_str()));
 		printf("LOADED\n");
 	}
+	printf("Length of img_vector: %d\tLength of img_labels: %d \n", img_vector.size(), img_labels.size());
 	printf("Initiating Recognition Algorithm...\n");
 	Ptr<FaceRecognizer> model = RECOGNITION_ALGO_BUILDER;
 	printf("Training Recognition Algorithm...\n");
