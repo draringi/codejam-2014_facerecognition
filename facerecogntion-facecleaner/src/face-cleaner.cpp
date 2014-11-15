@@ -13,7 +13,6 @@ using namespace cv;
 using namespace std;
 
 namespace facerecogntion{
-Mat norm_0_255(InputArray _src);
 Mat clean_face(Mat face){
 	CascadeClassifier filter;
 	filter.load( FACE_FILTER );
@@ -24,7 +23,7 @@ Mat clean_face(Mat face){
 	} else {
 		face.copyTo(gray_face);
 	}
-	filter.detectMultiScale( gray_face, faces, 1.1, 2, 0, Size(100, 100) );
+	filter.detectMultiScale( gray_face, faces, 1.1, 2, 0, Size(0, 0) );
 	Rect roi;
 	vector<Rect>::iterator it;
 	for(it=faces.begin(); it != faces.end(); it++){
@@ -32,8 +31,9 @@ Mat clean_face(Mat face){
 			roi = (*it);
 		}
 	}
-	Mat tmp = norm_0_255(gray_face(roi));
-	equalizeHist( tmp, tmp );
+	Mat tmp;
+	gray_face(roi).copyTo(tmp);
+	//equalizeHist( tmp, tmp );
 	return tmp;
 
 }
