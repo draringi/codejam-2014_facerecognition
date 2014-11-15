@@ -20,6 +20,7 @@ Mat clean_face(Mat face){
 	vector<Rect> faces;
 	Mat gray_face;
 	cvtColor( face, gray_face, CV_BGR2GRAY );
+	gray_face.convertTo(gray_face, CV_8UC1);
 	equalizeHist( gray_face, gray_face );
 	filter.detectMultiScale( gray_face, faces, 1.1, 2, 0, Size(100, 100) );
 	Rect roi;
