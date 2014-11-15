@@ -18,6 +18,7 @@
 #include <algorithm>
 #include <FreeImage.h>
 #include "file_type.h"
+#include "load_gif.h"
 
 using namespace std;
 using namespace cv;
@@ -52,10 +53,7 @@ void buildTrainer(string trainfile, queue<string> img_names){
 		} else if(file_format == "jpeg"||file_format == "jpg"||file_format == "jpe"||file_format == "jp2"||file_format == "png"||file_format == "tiff"||file_format == "tif"){
 			img = imread(img_name, CV_LOAD_IMAGE_GRAYSCALE);
 		} else if(file_format == "gif") {
-			FIBITMAP *src;
-			src = FreeImage_Load(FIF_GIF, img_name.c_str(), GIF_DEFAULT);
-			img = Mat(FreeImage_GetHeight(src), FreeImage_GetWidth(src), CV_32FC3, FreeImage_GetScanLine(src, 0)).clone();
-			flip(img, img, 0);
+			img = Mat(gif2ipl(img_name.c_str()), true);
 		} else {
 			fprintf (stderr, "'%s' is not a supported extension\n", file_format.c_str());
 		}
