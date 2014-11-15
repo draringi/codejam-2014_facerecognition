@@ -48,7 +48,7 @@ void buildTrainer(string trainfile, queue<string> img_names){
 		file_format = file_ext;
 		transform(file_format.begin(), file_format.end(), file_format.begin(), ::tolower);
 		Mat img;
-		printf("Loading %s\n", img_name.c_str());
+		printf("Loading %s:\t", img_name.c_str());
 		if(file_format == "bmp"||file_format == "dib"||file_format == "pbm"||file_format == "pgm"||file_format == "ppm"||file_format == "sr"||file_format == "ras"){
 			img = imread(img_name, CV_LOAD_IMAGE_GRAYSCALE);
 		} else if(file_format == "jpeg"||file_format == "jpg"||file_format == "jpe"||file_format == "jp2"||file_format == "png"||file_format == "tiff"||file_format == "tif"){
@@ -58,6 +58,7 @@ void buildTrainer(string trainfile, queue<string> img_names){
 		} else {
 			fprintf (stderr, "'%s' is not a supported extension\n", file_format.c_str());
 		}
+		printf("LOADED\n");
 		img_vector.push_back(facerecogntion::clean_face(img));
 		img_labels.push_back(atoi(label.c_str()));
 	}
