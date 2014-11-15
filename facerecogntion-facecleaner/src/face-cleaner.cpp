@@ -13,15 +13,13 @@ using namespace cv;
 using namespace std;
 
 namespace facerecogntion{
-
+Mat norm_0_255(InputArray _src);
 Mat clean_face(Mat face){
 	CascadeClassifier filter;
 	filter.load( FACE_FILTER );
 	vector<Rect> faces;
 	Mat gray_face;
 	cvtColor( face, gray_face, CV_BGR2GRAY );
-	gray_face.convertTo(gray_face, CV_8UC1);
-	equalizeHist( gray_face, gray_face );
 	filter.detectMultiScale( gray_face, faces, 1.1, 2, 0, Size(100, 100) );
 	Rect roi;
 	vector<Rect>::iterator it;
@@ -33,8 +31,25 @@ Mat clean_face(Mat face){
 	Mat tmp;
 	gray_face(roi).convertTo(tmp, CV_8UC1);
 	equalizeHist( tmp, tmp );
-	return tmp;
+	return norm_0_255(tmp);
 
+}
+Mat norm_0_255(InputArray _src) {
+    Mat src = _src.getMat();
+    // Create and return normalized image:
+    Mat dst;
+    switch(src.channels()) {
+    case 1:
+        cv::normalize(_src, dst, 0, 255, NORM_MINMAX, CV_8UC1);
+        break;
+    case 3:
+        cv::normalize(_src, dst, 0, 255, NORM_MINMAX, CV_8UC3);
+        break;
+    default:
+        src.copyTo(dst);
+        break;
+    }
+    return dst;
 }
 
 }
