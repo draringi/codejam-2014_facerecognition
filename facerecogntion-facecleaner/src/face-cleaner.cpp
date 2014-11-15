@@ -19,7 +19,11 @@ Mat clean_face(Mat face){
 	filter.load( FACE_FILTER );
 	vector<Rect> faces;
 	Mat gray_face;
-	cvtColor( face, gray_face, CV_BGR2GRAY );
+	if(face.channels()==3){
+		cvtColor( face, gray_face, CV_BGR2GRAY );
+	} else {
+		face.copyTo(gray_face);
+	}
 	filter.detectMultiScale( gray_face, faces, 1.1, 2, 0, Size(100, 100) );
 	Rect roi;
 	vector<Rect>::iterator it;
