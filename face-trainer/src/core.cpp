@@ -51,5 +51,6 @@ int main (int argc, char *argv[]){
 		image_list.push(argv[index]);
 	}
 	//Now that the command line has been parsed, let us make use of it.
+	printf("Done loading file names. Starting loading files now...\n");
 	buildTrainer(trainfile, image_list);
 }
