@@ -31,10 +31,9 @@ Mat clean_face(Mat face){
 			roi = (*it);
 		}
 	}
-	Mat tmp;
-	gray_face(roi).copyTo(tmp);
+	Mat tmp = gray_face(roi);
 	//equalizeHist( tmp, tmp );
-	return tmp;
+	return tmp.clone();
 
 }
 Mat norm_0_255(InputArray _src) {
