@@ -25,7 +25,7 @@ $(shell mkdir -p obj)
 $(shell mkdir -p bin)
 
 CFLAGS:= -c -O2 -Iheaders -I$(PROJECT_INCLUDE_DIR) -fpic $(WARNINGS)
-LDFLAGS:= -O2 -L$(PROJECT_LIB_DIR) $(LINKED_LIBRARIES)
+LDFLAGS:= -O2 -L$(PROJECT_LIB_DIR) $(LINKED_LIBRARIES) -ggdb
 
 all: $(APP)
 
