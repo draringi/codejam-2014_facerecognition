@@ -8,7 +8,7 @@
 #ifndef TRAINER_H_
 #define TRAINER_H_
 
-#define RECOGNITION_ALGO_BUILDER createLBPHFaceRecognizer()
+#define RECOGNITION_ALGO_BUILDER createFisherFaceRecognizer()
 
 #include <queue>
 #include <string>

@@ -32,9 +32,8 @@ Mat clean_face(Mat face){
 			roi = (*it);
 		}
 	}
-	Mat tmp;
-	gray_face(roi).copyTo(tmp);
-	//equalizeHist( tmp, tmp );
+	Mat tmp = norm_0_255(gray_face(roi));
+	equalizeHist( tmp, tmp );
 	return tmp;
 
 }
