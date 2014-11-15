@@ -30,7 +30,10 @@ Mat clean_face(Mat face){
 			roi = (*it);
 		}
 	}
-	return gray_face(roi).clone();
+	Mat tmp;
+	cvtColor(gray_face(roi), tmp, CV_BGR2GRAY);
+	return tmp;
+
 }
 
 }
