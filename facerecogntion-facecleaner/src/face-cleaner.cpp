@@ -29,9 +29,9 @@ Mat clean_face(Mat face){
 		}
 	}
 	Mat tmp;
-	gray_face(roi).convertTo(tmp, CV_8UC1);
-	equalizeHist( tmp, tmp );
-	return norm_0_255(tmp);
+	gray_face(roi).copyTo(tmp);
+	//equalizeHist( tmp, tmp );
+	return tmp;
 
 }
 Mat norm_0_255(InputArray _src) {
