@@ -34,7 +34,8 @@ Mat clean_face(Mat face){
 	Mat tmp = gray_face(roi);
 	tmp.convertTo(tmp, CV_8UC3);
 	equalizeHist( tmp, tmp );
-	return tmp.clone();
+	tmp.copyTo(gray_face);
+	return gray_face.clone();
 
 }
 /*Mat norm_0_255(InputArray _src) {
