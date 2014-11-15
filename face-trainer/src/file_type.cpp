@@ -10,7 +10,7 @@
 #include "file_type.h"
 
 char* get_file_extension(const char* str){
-	char* ptr = strrchr(str, '.');
+	char* ptr = strrchr((char*)str, '.');
 	if(ptr==NULL){
 		return NULL;
 	}
