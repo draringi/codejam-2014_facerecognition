@@ -12,7 +12,7 @@
 #include <string>
 
 using namespace std;
-
+bool supported(string ext);
 namespace facerecognition {
 cv::Mat load_file(char* filename);
 }
