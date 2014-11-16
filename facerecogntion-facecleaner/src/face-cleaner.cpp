@@ -18,7 +18,9 @@ namespace facerecognition{
 
 Mat clean_face(Mat face){
 	CascadeClassifier filter;
-	filter.load( FACE_FILTER );
+	if(!filter.load( FACE_FILTER )){
+		fprintf(stderr, "Filter failed to load\n");
+	}
 	vector<Rect> faces;
 	Mat gray_face;
 	if(face.channels()==3){
@@ -27,7 +29,7 @@ Mat clean_face(Mat face){
 		face.copyTo(gray_face);
 	}
 	printf("gray: %d\n", gray_face.total());
-	filter.detectMultiScale( gray_face, faces, 1.1, 2, 0, Size(0, 0) );
+	filter.detectMultiScale( gray_face, faces, 1.1, 2, 0|CV_HAAR_SCALE_IMAGE, Size(30, 30) );
 	Rect roi;
 	vector<Rect>::iterator it;
 	for(it=faces.begin(); it != faces.end(); it++){
