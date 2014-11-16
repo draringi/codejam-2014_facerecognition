@@ -11,6 +11,7 @@
 #include <stdlib.h>
 #include "load_file.h"
 #include <opencv2/highgui/highgui.hpp>
+#include <opencv2/imgproc/imgproc.hpp>
 
 using namespace cv;
 using namespace std;
@@ -41,7 +42,7 @@ Mat clean_face(Mat face){
 	Mat tmp(gray_face, roi);
 	tmp.convertTo(tmp, CV_8UC3);
 	equalizeHist( tmp, tmp );
-	tmp.copyTo(gray_face);
+	resize(tmp, gray_face, size(100, 100));
 	return gray_face.clone();
 
 }
