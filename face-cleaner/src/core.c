@@ -24,7 +24,6 @@ int main(int argc, char* argv[]){
 	} else{
 		tmp_filename_base++;
 	}
-	char* output_name = (char*) clean_and_save(filename, tmp_filename_base);
-	printf("%s\n", output_name);
+	clean_and_save(filename, tmp_filename_base);
 	return(EXIT_SUCCESS);
 }

@@ -56,5 +56,6 @@ const char* clean_and_save(char* input, char* tmp_base){
 	output_file.append(tmp_base);
 	output_file.append(".pgm");
 	imwrite(output_file, output);
+	printf("%s\n", output_file.c_str());
 	return output_file.c_str();
 }
