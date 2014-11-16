@@ -26,6 +26,7 @@ Mat clean_face(Mat face){
 	} else {
 		face.copyTo(gray_face);
 	}
+	printf("gray: %d\n", gray_face.total());
 	filter.detectMultiScale( gray_face, faces, 1.1, 2, 0, Size(0, 0) );
 	Rect roi;
 	vector<Rect>::iterator it;
@@ -35,6 +36,7 @@ Mat clean_face(Mat face){
 		}
 	}
 	Mat tmp(gray_face, roi);
+	printf("RECT: %d\n", tmp.total());
 	tmp.convertTo(tmp, CV_8UC3);
 	equalizeHist( tmp, tmp );
 	tmp.copyTo(gray_face);
