@@ -25,6 +25,7 @@ Mat load_file(char* filename){
 	Mat file;
 	if(ext == "gif"){
 		file = gif2ipl(filename);
+		flip(file, file, 0);
 	} else if (supported(ext)){
 		file = imread(filename, 0);
 	}
