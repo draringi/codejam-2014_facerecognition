@@ -1,0 +1,17 @@
+#!/usr/bin/bash
+DEFAULT_DB=/usr/share/codejam/2014/setA.yml.gz
+
+if [[ -z "$1" ]] then
+	echo "USAGE: $0 FACE_IMG [DB_FILE]"
+	echo "FACE_IMG: Path to image of face"
+	echo "DB_FILE: Path to Known Faces Database (Optional)"
+	exit 1
+fi
+FACE_IMG=$1
+if [[ -z "$2" ]] then
+	DB_FILE=$DEFAULT_DB
+else
+	DB_FILE=$2
+fi
+CLEANED_FACE=$(facerecog-cleaner "$FACE_IMG")
+facerecog "$CLEANED_FACE" "$DB_FILE"

@@ -1,0 +1,10 @@
+#!/usr/bin/bash
+
+function get_id {
+	ID=$(basename $1|tr '_' '\n'|head -n 1)
+	if [[ ! ($ID =~ ^-?[0-9]+$) ]]
+	then
+		ID=-1
+	fi
+	echo $ID
+}

@@ -1,0 +1,45 @@
+#!/usr/bin/bash
+
+source facerecognition_filename-func
+
+function build_csv {
+	CSV_FILE="/tmp/$(date -I)-$(basename "$1").csv"
+	rm -f "$CSV_FILE"
+	FILELIST=$(ls "$1")
+	for f in $FILELIST
+	do
+		ID=$(get_id $f)
+		if [[ "$ID" == "-1" ]]
+		then
+				continue
+		fi
+		CLEAN=$(facerecog-cleaner "$1/$f")
+		echo "$CLEAN;$ID" >> "$CSV_FILE"
+	done
+	echo $CSV_FILE
+}
+
+while getopts "f:d:" opt; do
+	case $opt in
+		f)
+			TARGET_FOLDER=$OPTARG
+			;;
+		d)
+			DB_FILE=$OPTARG
+			;;
+		\?)
+			echo "Invalid option: -$OPTARG" >&2
+			exit 1
+			;;
+		:)
+			echo "Option -$OPTARG requires an argument." >&2
+			exit 1
+			;;
+	esac
+done
+if [[ -z "$TARGET_FOLDER" -o -z "$DB_FILE"]] then
+	echo "Not enough arguments." >&2
+	echo "USAGE: $0 -i TARGET_FOLDER -d DB_FILE" >&2
+fi
+CSV_FILE=$(build_csv "$TARGET_FOLDER")
+facerecog-learn -i "$CSV_FILE" -o "$DB_FILE"
