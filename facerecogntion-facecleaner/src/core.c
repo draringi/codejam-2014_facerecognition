@@ -8,6 +8,7 @@
 #define _XOPEN_SOURCE
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <unistd.h>
 #include "face-cleaner.h"
 
@@ -17,7 +18,10 @@ int main(int argc, char* argv[]){
 		exit(EXIT_FAILURE);
 	}
 	char* filename = argv[1];
-	char* tmp_filename_base = crypt(filename, "ab");
+	char* tmp_filename_base = strrchr(filename, '/');
+	if(tmp_filename_base == NULL){
+		tmp_filename_base = filename;
+	}
 	char* output_name = (char*) clean_and_save(filename, tmp_filename_base);
 	printf("%s\n", output_name);
 	return(EXIT_SUCCESS);
