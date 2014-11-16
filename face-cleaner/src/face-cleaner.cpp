@@ -54,7 +54,7 @@ const char* clean_and_save(char* input, char* tmp_base){
 	Mat output = facerecognition::clean_face(img);
 	string output_file = TMP_FOLDER;
 	output_file.append(tmp_base);
-	output_file.append(".png");
+	output_file.append(".pgm");
 	imwrite(output_file, output);
 	return output_file.c_str();
 }
