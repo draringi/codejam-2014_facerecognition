@@ -12,8 +12,8 @@
 #include <string>
 
 using namespace std;
-bool supported(string ext);
 namespace facerecognition {
+bool supported(string ext);
 cv::Mat load_file(char* filename);
 }
 #endif /* LOAD_FILE_H_ */
