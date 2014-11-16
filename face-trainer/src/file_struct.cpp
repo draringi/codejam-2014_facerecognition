@@ -7,6 +7,7 @@
 
 #include "file_struct.h"
 #include <string.h>
+#include <stdlib.h>
 using namespace std;
 
 file_struct read_line(string line){

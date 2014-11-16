@@ -44,5 +44,5 @@ $(APP): $(PROJECT_OBJ)
 	@$(CC) $(LDFLAGS) $(PROJECT_OBJ) $(FACECLEANER_STATIC) -o $(APP)
 	
 clean:
-	@rm obj/*
-	@rm bin/*
+	-@rm obj/*
+	-@rm bin/*
