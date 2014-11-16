@@ -41,6 +41,7 @@ if [[ (-z "$TARGET_FOLDER") || (-z "$DB_FILE") ]]
 then
 	echo "Not enough arguments." >&2
 	echo "USAGE: $0 -i TARGET_FOLDER -d DB_FILE" >&2
+	exit 1
 fi
 CSV_FILE=$(build_csv "$TARGET_FOLDER")
 facerecog-learn -i "$CSV_FILE" -o "$DB_FILE"
