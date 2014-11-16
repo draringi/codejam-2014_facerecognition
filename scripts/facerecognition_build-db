@@ -40,7 +40,7 @@ done
 if [[ (-z "$TARGET_FOLDER") || (-z "$DB_FILE") ]]
 then
 	echo "Not enough arguments." >&2
-	echo "USAGE: $0 -i TARGET_FOLDER -d DB_FILE" >&2
+	echo "USAGE: $0 -f TARGET_FOLDER -d DB_FILE" >&2
 	exit 1
 fi
 CSV_FILE=$(build_csv "$TARGET_FOLDER")
