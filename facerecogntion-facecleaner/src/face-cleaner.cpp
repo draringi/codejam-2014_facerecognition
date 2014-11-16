@@ -46,8 +46,9 @@ Mat clean_face(Mat face){
 
 const char* clean_and_save(char* input, char* tmp_base){
 	Mat img = facerecognition::load_file(input);
-	Mat output;
+	printf("INPUT: %d\n", img.total);
 	output = facerecognition::clean_face(img);
+	printf("INPUT: %d\n", output.total);
 	string output_file = TMP_FOLDER;
 	output_file.append(tmp_base);
 	output_file.append(".png");
