@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>facerecogntion-facecleaner</name>
+	<name>face-recognizer</name>
 	<comment></comment>
 	<projects>
+		<project>facerecogntion-facecleaner</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
