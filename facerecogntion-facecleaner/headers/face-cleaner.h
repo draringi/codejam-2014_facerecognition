@@ -15,7 +15,7 @@
 #define TMP_FOLDER "/tmp/"
 
 namespace facerecognition {
-void clean_face(cv::Mat face, cv::Mat* result);
+cv::Mat clean_face(cv::Mat face);
 }
 
 const char* clean_and_save(char* input, char* tmp_base);

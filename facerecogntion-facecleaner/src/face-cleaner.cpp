@@ -16,7 +16,7 @@ using namespace std;
 
 namespace facerecognition{
 
-void clean_face(Mat face, Mat* result){
+Mat clean_face(Mat face){
 	CascadeClassifier filter;
 	filter.load( FACE_FILTER );
 	vector<Rect> faces;
@@ -38,7 +38,7 @@ void clean_face(Mat face, Mat* result){
 	tmp.convertTo(tmp, CV_8UC3);
 	equalizeHist( tmp, tmp );
 	tmp.copyTo(gray_face);
-	gray_face.copyTo(*result);
+	return gray_face.clone();
 
 }
 
@@ -47,7 +47,7 @@ void clean_face(Mat face, Mat* result){
 const char* clean_and_save(char* input, char* tmp_base){
 	Mat img = facerecognition::load_file(input);
 	Mat output;
-	facerecognition::clean_face(img, &output);
+	output = facerecognition::clean_face(img);
 	string output_file = TMP_FOLDER;
 	output_file.append(tmp_base);
 	output_file.append(".png");

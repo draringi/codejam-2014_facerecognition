@@ -21,6 +21,8 @@ int main(int argc, char* argv[]){
 	char* tmp_filename_base = strrchr(filename, '/');
 	if(tmp_filename_base == NULL){
 		tmp_filename_base = filename;
+	} else{
+		tmp_filename_base++;
 	}
 	char* output_name = (char*) clean_and_save(filename, tmp_filename_base);
 	printf("%s\n", output_name);
