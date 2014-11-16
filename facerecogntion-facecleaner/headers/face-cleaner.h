@@ -11,7 +11,7 @@
 #include <opencv2/objdetect/objdetect.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
 
-#define FACE_FILTER "/usr/share/OpenCV/haarcascades/haarcascade_frontalface_alt2.xml"
+#define FACE_FILTER "/usr/share/opencv/haarcascades/haarcascade_frontalface_alt2.xml"
 #define TMP_FOLDER "/tmp/"
 
 namespace facerecognition {
