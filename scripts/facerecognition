@@ -8,7 +8,8 @@ if [[ -z "$1" ]] then
 	exit 1
 fi
 FACE_IMG=$1
-if [[ -z "$2" ]] then
+if [[ -z "$2" ]]
+then
 	DB_FILE=$DEFAULT_DB
 else
 	DB_FILE=$2
