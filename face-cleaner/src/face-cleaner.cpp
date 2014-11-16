@@ -34,7 +34,6 @@ Mat clean_face(Mat face){
 	Rect roi;
 	vector<Rect>::iterator it;
 	for(it=faces.begin(); it != faces.end(); it++){
-		printf("rect_area: %d\n", it->area());
 		if(it->area() > roi.area()){
 			roi = (*it);
 		}
