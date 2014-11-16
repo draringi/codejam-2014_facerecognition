@@ -15,7 +15,7 @@
 namespace facerecognition {
 
 bool supported(string ext){
-	return ext == "jpeg" || ext == "png" || ext == "jpg" || ext == "bmp" || ext == "ras" || ext == "sr" || ext == "jpe";
+	return ext == "jpeg" || ext == "png" || ext == "jpg" || ext == "bmp" || ext == "ras" || ext == "sr" || ext == "jpe" || ext == "ppm"|| ext == "pgm";
 }
 
 using namespace cv;
@@ -28,7 +28,7 @@ Mat load_file(char* filename){
 	} else if (supported(ext)){
 		file = imread(filename, 0);
 	}
-	return file;
+	return file.clone();
 }
 
 }
