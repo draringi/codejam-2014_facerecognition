@@ -42,7 +42,7 @@ Mat clean_face(Mat face){
 	Mat tmp(gray_face, roi);
 	tmp.convertTo(tmp, CV_8UC3);
 	equalizeHist( tmp, tmp );
-	resize(tmp, gray_face, size(100, 100));
+	resize(tmp, gray_face, Size(100, 100));
 	return gray_face.clone();
 
 }
