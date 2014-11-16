@@ -8,6 +8,7 @@
 #include "face-cleaner.h"
 #include <vector>
 #include <stdio.h>
+#include <stdlib.h>
 #include "load_file.h"
 #include <opencv2/highgui/highgui.hpp>
 
@@ -20,6 +21,7 @@ Mat clean_face(Mat face){
 	CascadeClassifier filter;
 	if(!filter.load( FACE_FILTER )){
 		fprintf(stderr, "Filter failed to load\n");
+		abort();
 	}
 	vector<Rect> faces;
 	Mat gray_face;
@@ -28,7 +30,6 @@ Mat clean_face(Mat face){
 	} else {
 		face.copyTo(gray_face);
 	}
-	printf("gray: %d\n", gray_face.total());
 	filter.detectMultiScale( gray_face, faces, 1.1, 2, 0, Size(0, 0) );
 	Rect roi;
 	vector<Rect>::iterator it;
@@ -39,7 +40,6 @@ Mat clean_face(Mat face){
 		}
 	}
 	Mat tmp(gray_face, roi);
-	printf("RECT: %d\n", tmp.total());
 	tmp.convertTo(tmp, CV_8UC3);
 	equalizeHist( tmp, tmp );
 	tmp.copyTo(gray_face);
@@ -51,9 +51,7 @@ Mat clean_face(Mat face){
 
 const char* clean_and_save(char* input, char* tmp_base){
 	Mat img = facerecognition::load_file(input);
-	printf("INPUT: %d\n", img.total());
 	Mat output = facerecognition::clean_face(img);
-	printf("INPUT: %d\n", output.total());
 	string output_file = TMP_FOLDER;
 	output_file.append(tmp_base);
 	output_file.append(".png");
