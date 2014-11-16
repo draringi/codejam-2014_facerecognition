@@ -25,7 +25,7 @@ int main (int argc, char *argv[]){
 	bool csv_set = false;
 	queue<file_struct> image_list;
 	int flag;
-	while ((flag = getopt (argc, argv, "io")) != -1){
+	while ((flag = getopt(argc, argv, "i:o:")) != -1){
 		switch(flag){
 		case 'o':
 			trainfile = optarg;
