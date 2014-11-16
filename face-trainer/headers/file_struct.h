@@ -8,6 +8,7 @@
 #ifndef FILE_STRUCT_H_
 #define FILE_STRUCT_H_
 
+#include <string>
 using namespace std;
 
 typedef struct {

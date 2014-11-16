@@ -27,8 +27,6 @@ Mat load_file(char* filename){
 		file = gif2ipl(filename);
 	} else if (supported(ext)){
 		file = imread(filename, 0);
-	} else {
-		return NULL;
 	}
 	return file;
 }
