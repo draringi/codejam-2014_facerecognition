@@ -17,7 +17,7 @@ int main(int argc, char* argv[]){
 		exit(EXIT_FAILURE);
 	}
 	char* filename = argv[1];
-	char* tmp_filename_base = crypt(filename, filename);
+	char* tmp_filename_base = crypt(filename, "ab");
 	char* output_name = (char*) clean_and_save(filename, tmp_filename_base);
 	printf("%s\n", output_name);
 	return(EXIT_SUCCESS);
