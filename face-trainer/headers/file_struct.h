@@ -15,6 +15,6 @@ typedef struct {
 	int label;
 }file_struct;
 
-file_struct read_line(string);
+file_struct read_line(string filename);
 
 #endif /* FILE_STRUCT_H_ */

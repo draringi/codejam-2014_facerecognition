@@ -8,8 +8,8 @@ OPENCV_CFLAGS:=$(shell pkg-config opencv --cflags)
 CFLAGS:= -c -O2 -Iheaders $(WARNINGS) $(OPENCV_CFLAGS)        
 APP:=bin/facerecog_cleaner  
 OPENCV_LDFLAGS:=$(shell pkg-config opencv --libs)
-LDFLAGS:= -O2 $(WARNINGS) $(OPENCV_LIBS) -lfreeimage
-OBJ_LIST:= obj/face-cleaner.o obj/core.o obj/file_type.o obj/load_gif.o 
+LDFLAGS:= -O2 $(WARNINGS) $(OPENCV_LDFLAGS) -lfreeimage
+OBJ_LIST:= obj/face-cleaner.o obj/core.o obj/file_type.o obj/load_gif.o obj/load_file.o
 
 $(shell mkdir -p bin)
 $(shell mkdir -p obj)
