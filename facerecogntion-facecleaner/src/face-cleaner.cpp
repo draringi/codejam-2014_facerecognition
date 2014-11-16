@@ -34,7 +34,7 @@ Mat clean_face(Mat face){
 			roi = (*it);
 		}
 	}
-	Mat tmp = gray_face(roi);
+	Mat tmp(gray_face, roi);
 	tmp.convertTo(tmp, CV_8UC3);
 	equalizeHist( tmp, tmp );
 	tmp.copyTo(gray_face);
