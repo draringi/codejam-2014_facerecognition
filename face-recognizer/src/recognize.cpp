@@ -14,7 +14,7 @@ using namespace std;
 using namespace cv;
 
 int determine_id(string img_name, string db_name){
-	Ptr<FaceRecognizer> db;
+	Ptr<FaceRecognizer> db = RECOGNITION_ALGO_BUILDER;
 	db->load(db_name);
 	Mat image = imread(img_name, 0);
 	return db->predict(image);

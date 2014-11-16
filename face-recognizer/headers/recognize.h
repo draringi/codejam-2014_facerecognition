@@ -10,6 +10,8 @@
 
 #include <string>
 
+#define RECOGNITION_ALGO_BUILDER createFisherFaceRecognizer()
+
 int determine_id(std::string img_name, std::string db_name);
 
 
