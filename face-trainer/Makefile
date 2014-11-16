@@ -1,4 +1,4 @@
-.PHONY: all clean dist obj lib
+.PHONY: all clean dist
 CC:=g++
 
 WARNINGS:=-Wall -Wextra -pedantic -Wshadow -Wpointer-arith -Wcast-align \
@@ -13,19 +13,15 @@ PROJECT_HEADERS_CPP := $(shell find $(PROJECT_DIRS) -type f -name \*.hpp)
 PROJECT_OBJ := $(patsubst src/%, obj/%, $(patsubst %.c,%.o,$(PROJECT_SRC_C)))
 PROJECT_OBJ := $(PROJECT_OBJ) $(patsubst src/%, obj/%, $(patsubst %.cpp,%.o,$(PROJECT_SRC_CPP)))
 PROJECT_DEPS := $(patsubst %.o,%.d,$(PROJECT_OBJ)) 
-
-PROJECT_LIB_DIR:=../facerecogntion-facecleaner/lib/
-PROJECT_INCLUDE_DIR:=../facerecogntion-facecleaner/headers/
-FACECLEANER_STATIC:=$(PROJECT_LIB_DIR)libfacerecogntion_cleaner.a
-APP:=bin/face-trainer
+APP:=bin/facerecog-learn
 OPENCV_LIBS:=$(shell pkg-config opencv --libs)
-LINKED_LIBRARIES:= -Wl,--start-group $(OPENCV_LIBS) -Wl,--end-group -lfreeimage
+LINKED_LIBRARIES:= $(OPENCV_LIBS) -lfreeimage
 
 $(shell mkdir -p obj)
 $(shell mkdir -p bin)
 
-CFLAGS:= -c -O2 -Iheaders -I$(PROJECT_INCLUDE_DIR) -fpic $(WARNINGS)
-LDFLAGS:= -O2 -L$(PROJECT_LIB_DIR) $(LINKED_LIBRARIES) -ggdb
+CFLAGS:= -c -O2 -Iheaders $(WARNINGS)
+LDFLAGS:= -O2 $(LINKED_LIBRARIES)
 
 all: $(APP)
 

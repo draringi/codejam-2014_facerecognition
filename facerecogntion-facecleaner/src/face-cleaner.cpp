@@ -5,14 +5,17 @@
  *      Author: Michael Williams
  */
 
-#include "facerecogntion/face-cleaner.h"
+#include "face-cleaner.h"
 #include <vector>
 #include <stdio.h>
+#include "load_file.h"
+#include <opencv2/highgui/highgui.hpp>
 
 using namespace cv;
 using namespace std;
 
-namespace facerecogntion{
+namespace facerecognition{
+
 void clean_face(Mat face, Mat* result){
 	CascadeClassifier filter;
 	filter.load( FACE_FILTER );
@@ -38,22 +41,16 @@ void clean_face(Mat face, Mat* result){
 	gray_face.copyTo(*result);
 
 }
-/*Mat norm_0_255(InputArray _src) {
-    Mat src = _src.getMat();
-    // Create and return normalized image:
-    Mat dst;
-    switch(src.channels()) {
-    case 1:
-        cv::normalize(_src, dst, 0, 255, NORM_MINMAX, CV_8UC1);
-        break;
-    case 3:
-        cv::normalize(_src, dst, 0, 255, NORM_MINMAX, CV_8UC3);
-        break;
-    default:
-        src.copyTo(dst);
-        break;
-    }
-    return dst;
-}*/
 
+}
+
+const char* clean_and_save(char* input, char* tmp_base){
+	Mat img = facerecognition::load_file(input);
+	Mat output;
+	facerecognition::clean_face(img, &output);
+	string output_file = TMP_FOLDER;
+	output_file.append(tmp_base);
+	output_file.append(".png");
+	imwrite(output_file, output);
+	return output_file.c_str();
 }

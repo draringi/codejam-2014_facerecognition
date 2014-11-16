@@ -13,22 +13,30 @@
 #include <queue>
 #include <string>
 #include "trainer.h"
+#include <fstream>
+#include <sstream>
 
 using namespace std;
 
 int main (int argc, char *argv[]){
 	string trainfile;
+	string csv_file;
 	bool train_set = false;
-	queue<string> image_list;
+	bool csv_set = false;
+	queue<file_struct> image_list;
 	int flag;
-	while ((flag = getopt (argc, argv, "o:")) != -1){
+	while ((flag = getopt (argc, argv, "io")) != -1){
 		switch(flag){
 		case 'o':
 			trainfile = optarg;
 			train_set = true;
 			break;
+		case 'i':
+			csv_file = optarg;
+			csv_set = true;
+			break;
 		case '?':
-			if (optopt == 'o'){
+			if (optopt == 'o'||optopt == 'i'){
 				fprintf (stderr, "Option -%c requires an argument.\n", optopt);
 			} else if (isprint (optopt)){
 				fprintf (stderr, "Unknown option `-%c'.\n", optopt);
@@ -46,9 +54,18 @@ int main (int argc, char *argv[]){
 		fprintf (stderr, "Output file must be set using -o\n");
 		return 1;
 	}
-	int index;
-	for (index = optind; index < argc; index++){
-		image_list.push(argv[index]);
+	if(!csv_set){
+			fprintf (stderr, "CSV file must be set using -i\n");
+			return 1;
+		}
+	ifstream file(csv_file.c_str(), ifstream::in);
+	if(!file){
+		fprintf (stderr, "CSV file does not exist\n");
+		return 1;
+	}
+	string line;
+	while(getline(file, line)){
+		image_list.push(read_line(line));
 	}
 	//Now that the command line has been parsed, let us make use of it.
 	printf("Done loading file names. Starting loading files now...\n");

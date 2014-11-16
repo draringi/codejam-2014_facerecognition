@@ -12,8 +12,9 @@
 
 #include <queue>
 #include <string>
+#include "file_struct.h"
 
-void buildTrainer(std::string trainfile, std::queue<std::string> img_names);
+void buildTrainer(std::string trainfile, std::queue<file_struct> img_names);
 
 
 #endif /* TRAINER_H_ */
