@@ -72,11 +72,12 @@ const char* clean_and_save(char* input, char* tmp_base, int recog){
 	try{
 		output = facerecognition::clean_face(img, recog);
 	} catch (...){
-		return '\0';
+		return NULL;
 	}
 	string output_file = TMP_FOLDER;
 	output_file.append(tmp_base);
 	output_file.append(".pgm");
 	imwrite(output_file, output);
+	printf("%s\n", output_file.c_str());
 	return output_file.c_str();
 }
