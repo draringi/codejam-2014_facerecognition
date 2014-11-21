@@ -18,13 +18,17 @@ int main(int argc, char* argv[]){
 		exit(EXIT_FAILURE);
 	}
 	char* filename = argv[1];
+	int recog = 0;
+	if(argc > 2){
+		recog = 1;
+	}
 	char* tmp_filename_base = strrchr(filename, '/');
 	if(tmp_filename_base == NULL){
 		tmp_filename_base = filename;
 	} else{
 		tmp_filename_base++;
 	}
-	char* output_name = (char*) clean_and_save(filename, tmp_filename_base);
+	char* output_name = (char*) clean_and_save(filename, tmp_filename_base, recog);
 	printf("%s\n", output_name);
 	return(EXIT_SUCCESS);
 }

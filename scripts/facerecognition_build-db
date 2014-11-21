@@ -14,7 +14,10 @@ function build_csv {
 				continue
 		fi
 		CLEAN=$(facerecog-cleaner "$1/$f")
-		echo "$CLEAN;$ID" >> "$CSV_FILE"
+		if [[ ! ( -z "$CLEAN")  ]]
+		then
+			echo "$CLEAN;$ID" >> "$CSV_FILE"
+		fi
 	done
 	echo $CSV_FILE
 }

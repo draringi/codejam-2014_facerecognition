@@ -18,11 +18,12 @@ using namespace std;
 
 namespace facerecognition{
 
-Mat clean_face(Mat face){
+Mat clean_face(Mat face, int recog){
 	CascadeClassifier filter;
-	if(!filter.load( FACE_FILTER )){
-		fprintf(stderr, "Filter failed to load\n");
-		abort();
+	if( recog == 1){
+		filter.load( FACE_FILTER_ALT );
+	} else {
+		filter.load( FACE_FILTER );
 	}
 	vector<Rect> faces;
 	Mat gray_face;
@@ -39,19 +40,40 @@ Mat clean_face(Mat face){
 			roi = (*it);
 		}
 	}
+	// 40x40 gives 1600
+	if(roi.area() < 1600){
+		if(recog!=1){
+			throw;
+		}
+		filter.load( FACE_PROFILE );
+		filter.detectMultiScale( gray_face, faces, 1.1, 2, 0, Size(0, 0) );
+		for(it=faces.begin(); it != faces.end(); it++){
+			if(it->area() > roi.area()){
+				roi = (*it);
+			}
+		}
+		if(roi.area() < 2000){
+			throw;
+		}
+	}
 	Mat tmp(gray_face, roi);
 	tmp.convertTo(tmp, CV_8UC3);
 	equalizeHist( tmp, tmp );
-	resize(tmp, gray_face, Size(100, 100));
+	resize(tmp, gray_face, Size(150, 150));
 	return gray_face.clone();
 
 }
 
 }
 
-const char* clean_and_save(char* input, char* tmp_base){
+const char* clean_and_save(char* input, char* tmp_base, int recog){
 	Mat img = facerecognition::load_file(input);
-	Mat output = facerecognition::clean_face(img);
+	Mat output;
+	try{
+		output = facerecognition::clean_face(img, recog);
+	} catch (...){
+		return '\0';
+	}
 	string output_file = TMP_FOLDER;
 	output_file.append(tmp_base);
 	output_file.append(".pgm");

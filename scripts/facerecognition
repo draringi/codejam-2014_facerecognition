@@ -15,5 +15,10 @@ then
 else
 	DB_FILE=$2
 fi
-CLEANED_FACE=$(facerecog-cleaner "$FACE_IMG")
-facerecog "$CLEANED_FACE" "$DB_FILE"
+CLEANED_FACE=$(facerecog-cleaner "$FACE_IMG" 1)
+if [[ -z "$CLEANED_FACE" ]]
+then
+	echo -1
+else
+	facerecog "$CLEANED_FACE" "$DB_FILE"
+fi
