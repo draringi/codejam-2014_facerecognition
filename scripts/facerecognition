@@ -18,7 +18,17 @@ fi
 CLEANED_FACE=$(facerecog-cleaner "$FACE_IMG" 1)
 if [[ -z "$CLEANED_FACE" ]]
 then
-	echo -1
+	ID=-2
 else
-	facerecog "$CLEANED_FACE" "$DB_FILE"
+	ID=$(facerecog "$CLEANED_FACE" "$DB_FILE")
+fi
+
+if [[ "$ID" == "-2" ]]
+then
+	echo "DENIED: No Face Detected"
+elif [[ "$ID" == "-1" ]]
+then
+	echo "DENIED: Unknown Face"
+else
+	echo $ID
 fi
