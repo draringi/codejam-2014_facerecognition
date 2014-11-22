@@ -10,7 +10,7 @@
 
 #include <string>
 
-#define RECOGNITION_ALGO_BUILDER createLBPHFaceRecognizer(3, 8, 8, 8, 90)
+#define RECOGNITION_ALGO_BUILDER createLBPHFaceRecognizer(3, 8, 8, 8, 105)
 
 int determine_id(std::string img_name, std::string db_name);
 
