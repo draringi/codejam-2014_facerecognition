@@ -10,7 +10,7 @@
 #include <stdlib.h>
 using namespace std;
 
-file_struct read_line(string line){
+file_struct read_line(string line) {
 	char* str = (char*) line.c_str();
 	char* ptr;
 	file_struct result;
@@ -20,5 +20,4 @@ file_struct read_line(string line){
 	result.label = atoi(ptr);
 	return result;
 }
-
 

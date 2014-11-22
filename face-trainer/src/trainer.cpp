@@ -5,7 +5,6 @@
  *      Author: Michael Williams
  */
 
-
 #include "trainer.h"
 #include <opencv2/contrib/contrib.hpp>
 #include <opencv2/core/core.hpp>
@@ -18,10 +17,10 @@
 using namespace std;
 using namespace cv;
 
-void buildTrainer(string trainfile, queue<file_struct> img_names){
+void buildTrainer(string trainfile, queue<file_struct> img_names) {
 	vector<Mat> img_vector;
 	vector<int> img_labels;
-	while(!img_names.empty()){
+	while (!img_names.empty()) {
 		file_struct img_struct = img_names.front();
 		img_names.pop();
 		string img_name = img_struct.filename;
@@ -32,7 +31,8 @@ void buildTrainer(string trainfile, queue<file_struct> img_names){
 		img_labels.push_back(img_struct.label);
 		printf("LOADED\n");
 	}
-	printf("Length of img_vector: %d\tLength of img_labels: %d \n", img_vector.size(), img_labels.size());
+	printf("Length of img_vector: %d\tLength of img_labels: %d \n",
+			img_vector.size(), img_labels.size());
 	printf("Initiating Recognition Algorithm...\n");
 	Ptr<FaceRecognizer> model = RECOGNITION_ALGO_BUILDER;
 	printf("Training Recognition Algorithm...\n");
