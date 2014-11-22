@@ -1,4 +1,5 @@
 #!/usr/bin/bash
+# Writen by: Michael Williams <draringi@draringi.net>
 DEFAULT_DB=/usr/share/codejam/2014/setA.yml.gz
 
 if [[ -z "$1" ]]

@@ -1,6 +1,14 @@
 #!/usr/bin/bash
+# Writen by: Michael Williams <draringi@draringi.net>
 
-source facerecognition_filename-func
+function get_id {
+        ID=$(basename $1|tr '_' '\n'|head -n 1)
+        if [[ ! ($ID =~ ^-?[0-9]+$) ]]
+        then
+                ID=-1
+        fi
+        echo $ID
+}
 
 function build_csv {
 	CSV_FILE="/tmp/$(date -I)-$(basename "$1").csv"
