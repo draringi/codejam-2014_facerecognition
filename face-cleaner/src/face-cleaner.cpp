@@ -16,49 +16,49 @@
 using namespace cv;
 using namespace std;
 
-namespace facerecognition{
+namespace facerecognition {
 
-Mat clean_face(Mat face, int recog){
+Mat clean_face(Mat face, int recog) {
 	CascadeClassifier filter;
-	if( recog == 1){
-		filter.load( FACE_FILTER_ALT );
+	if (recog == 1) {
+		filter.load( FACE_FILTER_ALT);
 	} else {
-		filter.load( FACE_FILTER );
+		filter.load( FACE_FILTER);
 	}
 	vector<Rect> faces;
 	Mat gray_face;
-	if(face.channels()==3){
-		cvtColor( face, gray_face, CV_BGR2GRAY );
+	if (face.channels() == 3) {
+		cvtColor(face, gray_face, CV_BGR2GRAY);
 	} else {
 		face.copyTo(gray_face);
 	}
-	filter.detectMultiScale( gray_face, faces, 1.1, 2, 0, Size(0, 0) );
+	filter.detectMultiScale(gray_face, faces, 1.1, 2, 0, Size(0, 0));
 	Rect roi;
 	vector<Rect>::iterator it;
-	for(it=faces.begin(); it != faces.end(); it++){
-		if(it->area() > roi.area()){
+	for (it = faces.begin(); it != faces.end(); it++) {
+		if (it->area() > roi.area()) {
 			roi = (*it);
 		}
 	}
 	// 40x40 gives 1600
-	if(roi.area() < 1600){
-		if(recog!=1){
+	if (roi.area() < 1600) {
+		if (recog != 1) {
 			throw;
 		}
-		filter.load( FACE_PROFILE );
-		filter.detectMultiScale( gray_face, faces, 1.1, 2, 0, Size(0, 0) );
-		for(it=faces.begin(); it != faces.end(); it++){
-			if(it->area() > roi.area()){
+		filter.load( FACE_PROFILE);
+		filter.detectMultiScale(gray_face, faces, 1.1, 2, 0, Size(0, 0));
+		for (it = faces.begin(); it != faces.end(); it++) {
+			if (it->area() > roi.area()) {
 				roi = (*it);
 			}
 		}
-		if(roi.area() < 2000){
+		if (roi.area() < 2000) {
 			throw;
 		}
 	}
 	Mat tmp(gray_face, roi);
 	tmp.convertTo(tmp, CV_8UC3);
-	equalizeHist( tmp, tmp );
+	equalizeHist(tmp, tmp);
 	resize(tmp, gray_face, Size(150, 150));
 	return gray_face.clone();
 
@@ -66,12 +66,12 @@ Mat clean_face(Mat face, int recog){
 
 }
 
-const char* clean_and_save(char* input, char* tmp_base, int recog){
+const char* clean_and_save(char* input, char* tmp_base, int recog) {
 	Mat img = facerecognition::load_file(input);
 	Mat output;
-	try{
+	try {
 		output = facerecognition::clean_face(img, recog);
-	} catch (...){
+	} catch (...) {
 		return NULL;
 	}
 	string output_file = TMP_FOLDER;

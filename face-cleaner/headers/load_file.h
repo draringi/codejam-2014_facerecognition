@@ -2,7 +2,7 @@
  * load_file.h
  *
  *  Created on: Nov 15, 2014
- *      Author: draringi
+ *      Author: Michael Williams
  */
 
 #ifndef LOAD_FILE_H_
